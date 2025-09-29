@@ -35,8 +35,7 @@ class Solution {
                 }
             }
         }
-
-        
+    
 
         helper(root.left);
         helper(root.right);
