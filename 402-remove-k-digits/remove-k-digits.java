@@ -13,7 +13,6 @@ class Solution {
             s.push(ch);
         }
 
-        // remove leftover k digits FROM STACK before building result
         while (k > 0 && !s.isEmpty()) {
             s.pop();
             k--;
