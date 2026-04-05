@@ -7,7 +7,7 @@ class Solution {
             if(currprice + cost <= coins){
                 currprice+=cost;
                 count++;
-            }
+            }else break;
         }
         return count;
     }
