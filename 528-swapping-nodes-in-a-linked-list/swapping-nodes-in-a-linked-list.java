@@ -25,8 +25,8 @@ class Solution {
 
       
         ListNode second=head;
-        int endPos=len-k+1;
-        for (int i=1; i<endPos;i++) { 
+        int endPos=len-k;
+        for (int i=0; i<endPos;i++) { 
             second=second.next;
         }
 
@@ -35,10 +35,5 @@ class Solution {
         second.val=tempVal;
 
         return head;
-
-        
-
-
-
     }
 }
