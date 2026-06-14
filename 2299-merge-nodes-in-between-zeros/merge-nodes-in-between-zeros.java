@@ -10,23 +10,21 @@
  */
 class Solution {
     public ListNode mergeNodes(ListNode head) {
-        ListNode temp= head;
-        ListNode moving= head.next;
+        ListNode dummy = new ListNode(-1);
+        ListNode tail=dummy;
+        ListNode temp= head.next; //skipiing first zero node
         int sum=0;
-        while (moving != null) {
-            if (moving.val == 0) {
-                temp.val = sum;     
-                if (moving.next != null) {
-                    temp.next = moving; 
-                    temp = temp.next;
-                }
-                sum = 0;
-            } else {
-                sum += moving.val;
+        while(temp!=null){
+            if(temp.val==0){
+                tail.next = new ListNode(sum); // creating new node 
+                tail=tail.next;
+                sum=0; //setting sum=0 again for next range
+            }else{
+                sum+=temp.val;
             }
-            moving = moving.next;
+            temp=temp.next;
         }
-        temp.next=null;
-        return head;
+        return dummy.next;
     }
+
 }
