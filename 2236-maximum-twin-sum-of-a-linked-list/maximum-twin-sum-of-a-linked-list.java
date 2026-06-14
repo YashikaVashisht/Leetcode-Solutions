@@ -9,37 +9,39 @@
  * }
  */
 class Solution {
-    public ListNode reverse(ListNode node){
-        ListNode curr= node;
-        ListNode prev= null;
+    public ListNode reverse(ListNode head){
+        ListNode curr=head;
+        ListNode prev=null;
         ListNode next;
-        while(curr!= null){
+        while(curr!=null){
             next=curr.next;
             curr.next=prev;
             prev=curr;
-            curr= next;
+            curr=next;
         }
         return prev;
     }
-    public int pairSum(ListNode head) {
-        ListNode slow= head;
-        ListNode fast= head;
-        while(fast!= null &&fast.next!= null){
-            slow=slow.next;
+    public ListNode findmid(ListNode head){
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null &&fast.next!=null){
+            slow=slow.next; 
             fast=fast.next.next;
         }
-        ListNode newHead= reverse(slow);
-        slow=head;
+        return slow;
+    }
+    public int pairSum(ListNode head) {
+        ListNode temp=head;
+        ListNode mid=findmid(temp); //will get the mid 
+        ListNode reversedhead= reverse(mid); //reverse the right half 
 
-        int max=Integer.MIN_VALUE;
-        while(newHead!= null){
-            int sum= newHead.val+slow.val;
-            max= Math.max(max, sum);
-            slow=slow.next;
-            newHead=newHead.next;
+        int max= 0;
+        while(temp!=mid){
+            int sum= temp.val+ reversedhead.val;
+            max=Math.max(max, sum);
+            temp=temp.next;
+            reversedhead=reversedhead.next;
         }
-
         return max;
-
     }
 }
