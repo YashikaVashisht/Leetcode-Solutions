@@ -1,23 +1,22 @@
 class Solution {
-    public boolean ifPossible(int[] arr, int day, int k, int m){
-        int poss=0;
-        int counter=0;
-        for(int a:arr){
-           if (a <= day) {
-                counter++;
-                if(counter == k) {
-                    poss++;
-                    counter = 0;
+    public boolean helper(int[] bloomDay, int m, int k, int day){
+        int count=0;
+        for(int d:bloomDay){
+            if(d<=day){//checking if the flower bloomed or not 
+                count++; //adjacent flower added
+                if(count==k){
+                    m--; //baout made
+                    count=0;// start counting for the next bouquet
+                    if (m == 0)
+                    return true;
                 }
-            } else {
-                counter = 0;
+            }else{
+                //break adjacent
+                count=0;
             }
         }
-        if(poss>=m){
-            return true;
-        }else{
-            return false;
-        }
+      
+        return false;
     }
     public int minDays(int[] bloomDay, int m, int k) {
         int mini=Integer.MAX_VALUE;
@@ -27,21 +26,20 @@ class Solution {
             mini= Math.min(mini, i);
         }
 
-        int low= mini;
-        int high= maxi;
-
+        int l= mini;
+        int r= maxi;
         int ans=-1;
-
-        while(low<= high){
-            int mid=(high+low)/2;
-            boolean ispossible=ifPossible(bloomDay, mid, k,m);
-            if(ispossible==true){
-                ans=mid;
-                high=mid-1;
+        while(l<=r){
+            int mid= (l+r)/2;
+            boolean possible= helper(bloomDay, m , k , mid);
+            if(possible==true){
+                ans= mid;
+                r=mid-1;
             }else{
-                low=mid+1;
+                l=mid+1;
             }
         }
         return ans;
+
     }
 }
