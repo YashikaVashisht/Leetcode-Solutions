@@ -1,38 +1,38 @@
 class Solution {
-    public long calHours(int[] arr, int k){ //calculating for the possible value for k
-        long poss=0;  
-        for(int i=0;i<arr.length;i++){
-            if(arr[i] <=k){ 
-                poss+=1;
+    //hours calculating functions
+    public int hours(int[] piles, int k){
+        int hours=0;
+        for(int i=0;i<piles.length;i++){
+            if(piles[i] <=k ){
+                hours+=1;
             }else{
-                poss+=(long) Math.ceil((double)arr[i]/k); 
+                hours+= Math.ceil((double)piles[i]/k);
             }
         }
-        return poss;
+        return hours;
     }
     public int minEatingSpeed(int[] piles, int h) {
-        int n=piles.length;
-        int maxi=-1;
-        for(int i: piles){
-            maxi=Math.max(maxi,i);
-        }
-        // System.out.println(maxi);
-
+        int l=1;
+        int n= piles.length;
+        int maxi=0;
         int ans=0;
-        int low=1;
-        int high=maxi;
-        while(low<=high){
-            int mid=(high+low)/2;
-            long req= calHours(piles,mid);
-            // System.out.println(req);
+        for(int i:piles){
+            maxi=Math.max(maxi, i);
+        }
+        int r= maxi;
 
-            if(req <= h){
-                ans=mid;
-                high=mid-1;
+        while(l<=r){
+            int mid= (l+r)/2; // a possible va;ue og k
+            int tempK= hours(piles, mid);
+            if(tempK<=h){
+                ans= mid;
+                r= mid-1;
             }else{
-                low= mid+1;
+                l=mid+1;
             }
+
         }
         return ans;
     }
+
 }
