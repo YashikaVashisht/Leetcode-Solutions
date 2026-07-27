@@ -17,14 +17,14 @@ class Solution {
         int carry=0;
         while(temp1!=null || temp2!=null){
             int sum=carry;
-            if(temp1!=null && temp2!=null){
+            if(temp1!=null && temp2!=null){ //if both list exists
                 sum += temp1.val+temp2.val;
                 temp1=temp1.next;
                 temp2=temp2.next;
-            }else if(temp1==null && temp2!=null){
+            }else if(temp1==null && temp2!=null){ //if l2 is long 
                 sum+=temp2.val;
                 temp2=temp2.next;
-            }else if(temp1!=null && temp2==null){
+            }else if(temp1!=null && temp2==null){//if l1 is long 
                 sum+=temp1.val;
                 temp1=temp1.next;
             }
@@ -32,13 +32,11 @@ class Solution {
 
             if(sum<10){
                 curr.next=new ListNode(sum); 
-                carry=0;
-                //curr=curr.next;
+                carry=0; //setting carry to 0
             }
             else{
                 curr.next=new ListNode(sum%10);
                 carry=sum/10;
-                //curr=curr.next;
             }
             curr=curr.next;
             
