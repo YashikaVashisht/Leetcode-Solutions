@@ -19,7 +19,7 @@ class Solution {
         if(root==null) return 0;
 
         if(root.left!=null){
-            if(root.left.left==null && root.left.right==null){
+            if(root.left.left==null && root.left.right==null){ // leaf node 
                 sum+=root.left.val;
             }else{
                 helper(root.left);
