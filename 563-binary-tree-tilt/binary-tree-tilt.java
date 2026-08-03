@@ -14,17 +14,19 @@
  * }
  */
 class Solution {
-    int sum=0;
+    int res=0;
     public int helper(TreeNode root){
         if(root== null) return 0;
         int left= helper(root.left);
         int right= helper(root.right);
-        sum+= Math.abs(left-right);
-        return left+right+root.val;
+        int total = left+right+root.val;
+        root.val= Math.abs(left-right);
+        res+= root.val;
+        return total;
 
     }
     public int findTilt(TreeNode root) {
         helper(root);
-        return sum;
+        return res;
     }
 }
