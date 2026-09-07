@@ -1,37 +1,31 @@
 class Solution {
-    public boolean canFinish(int V, int[][] prereq) {
- 
-        int l= prereq.length;
-        ArrayList<ArrayList<Integer>> adj= new ArrayList<>(V);
-        for(int i=0;i<V;i++){
+    public boolean canFinish(int n, int[][] prerequisites) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<n;i++){
             adj.add(new ArrayList<>());
         }
-        int[] indeg = new int[V];
-        for(int i=0;i<l;i++){
-            int u=prereq[i][1] ;
-            int v=prereq[i][0] ;
+        int[] indeg= new int[n];
+        for(int [] edge: prerequisites){
+            int u= edge[0];
+            int v= edge[1];
             adj.get(u).add(v);
-            indeg[v]++;
+            indeg[v]++; //u->v 
         }
-
-       Queue<Integer> q= new ArrayDeque<>();
-       int count=0;
-        for(int i=0;i<V;i++){
+        Queue<Integer> q= new ArrayDeque<>();
+        for(int i=0;i<n;i++){
             if(indeg[i]==0){
-                q.add(i);
+                q.offer(i);
             }
         }
- 
+        int count=0;
         while(!q.isEmpty()){
-            int node=q.poll();
+            int node= q.poll();
             count++;
-            for(int it:adj.get(node)){
-                indeg[it]--;
-                if(indeg[it]==0){
-                    q.add(it);
-                }
+            for(int neigh: adj.get(node)){
+                indeg[neigh]--; //removing the edge
+                if(indeg[neigh]==0) q.offer(neigh);
             }
-            if(count==V) return true;
+            if(count==n) return true;
         }
         return false;
 
