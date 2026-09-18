@@ -29,7 +29,6 @@ class Solution {
                 temp1=temp1.next;
             }
                 
-
             if(sum<10){
                 curr.next=new ListNode(sum); 
                 carry=0; //setting carry to 0
