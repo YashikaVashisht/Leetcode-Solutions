@@ -9,34 +9,39 @@
  * }
  */
 class Solution {
+     public ListNode reverse(ListNode head){
+        ListNode curr= head;
+        ListNode prev=null;
+        ListNode next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+     }
     public void reorderList(ListNode head) {
-        ArrayList<Integer> store= new ArrayList<>();
-        ListNode slow= head;
-        ListNode fast= head;
-        while(fast!=null && fast.next!=null){
+        ListNode temp1=head;
+        ListNode slow=head;
+         ListNode fast=head;
+         while(fast!=null && fast.next!=null){
             slow=slow.next;
             fast=fast.next.next;
+         }
+ 
+        ListNode temp2=reverse(slow);
+ 
+        //reconnecting
+        while(temp2!=null && temp2.next!=null){
+            ListNode n1=temp1.next;
+            ListNode n2=temp2.next;
+            temp1.next= temp2;
+            temp2=n2; //next itertion
+            temp1.next.next=n1;
+            temp1=temp1.next.next;
         }
-        ListNode temp=slow.next;
-        while(temp!=null){
-            store.add(temp.val);
-            temp=temp.next;
-        }
-        slow.next=null;
-
-        Collections.reverse(store);
-        ListNode curr=head;
-      
-        int i=0;
-        while(curr!=null && i< store.size()){
-            ListNode nayi=new ListNode(store.get(i));
-            nayi.next=curr.next;
-            curr.next=nayi;
-            curr=curr.next.next;
-            i++;
-        }
-        
-
-
+       
+ 
     }
 }
